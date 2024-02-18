@@ -2,6 +2,8 @@ package br.ifsp.photos.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import br.ifsp.photos.R
 import br.ifsp.photos.adapter.PhotosAdapter
@@ -32,6 +34,21 @@ class MainActivity : AppCompatActivity() {
 
         amb.photosSp.apply {
             adapter = photosAdapter
+            onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    // N/A TEMPORARY
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // N/A
+                }
+
+            }
         }
 
         retrievePhotos()

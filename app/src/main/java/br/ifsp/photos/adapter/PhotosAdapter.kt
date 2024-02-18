@@ -24,6 +24,7 @@ class PhotosAdapter (
             }
 
         (photosView.tag as PhotosHolder).photosTitleTv.text = photosList[position].title
+
         return photosView
     }
 
