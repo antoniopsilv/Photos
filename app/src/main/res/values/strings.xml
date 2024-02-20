@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Photos</string>
     <string name="request_problem">Request Problem!</string>
+    <string name="Clear" />
 </resources>
