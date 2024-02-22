@@ -5,6 +5,7 @@ import com.android.volley.NetworkResponse
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.Response.success
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.Volley
@@ -37,7 +38,6 @@ class PhotosJSONAPI(context: Context) {
     fun <T> addToRequestQueue(request: Request<T>) {
         requestQueue.add(request)
     }
-
     class PhotosListRequest(
         private val responseListener: Response.Listener<Photos>,
         errorListener: Response.ErrorListener
@@ -46,16 +46,14 @@ class PhotosJSONAPI(context: Context) {
         override fun parseNetworkResponse(response: NetworkResponse?): Response<Photos> =
             if(response?.statusCode == HTTP_OK || response?.statusCode == HTTP_NOT_MODIFIED) {
                 String(response.data).run {
-                    Response.success(
+                    success(
                         Gson().fromJson(this, Photos::class.java),
                         HttpHeaderParser.parseCacheHeaders(response)
                     )
                 }
-
             } else {
                 Response.error(VolleyError())
             }
-
 
         override fun deliverResponse(response: Photos?) {
             responseListener.onResponse(response)
